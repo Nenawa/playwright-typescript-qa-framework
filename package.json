@@ -1,0 +1,23 @@
+{
+  "name": "playwright-typescript-qa-framework",
+  "version": "1.0.0",
+  "description": "Playwright and TypeScript QA automation framework featuring Page Object Model, API testing, reporting and CI/CD integration.",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nenawa/playwright-typescript-qa-framework.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Nenawa/playwright-typescript-qa-framework/issues"
+  },
+  "homepage": "https://github.com/Nenawa/playwright-typescript-qa-framework#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.60.0",
+    "@types/node": "^25.9.2"
+  }
+}

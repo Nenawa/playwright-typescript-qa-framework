@@ -1,0 +1,5 @@
+{
+    "validUser":{ "username": "standard_user", "password": "secret_sauce" },
+    "unvalidUser": {"username": "locked_out_user", "password": "wrong_password"}
+
+}

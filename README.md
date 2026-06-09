@@ -1,4 +1,6 @@
 # playwright-typescript-qa-framework
+QA Automation Engineer ayant conçu un framework Playwright/TypeScript moderne intégrant POM, tests API, fixtures, CI/CD et Docker.
+
 Playwright and TypeScript QA automation framework featuring Page Object Model, API testing, reporting and CI/CD integration.
 
 A test automation project built with Playwright and TypeScript.

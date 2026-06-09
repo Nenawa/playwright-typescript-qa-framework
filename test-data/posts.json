@@ -1,0 +1,12 @@
+{
+  "validPost": {
+    "userId": 123,
+    "title": "Loving API power",
+    "body": "this is a very long body"
+  },
+  "anotherPost": {
+    "userId": 456,
+    "title": "Playwright API",
+    "body": "Testing API with Playwright"
+  }
+}

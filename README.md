@@ -10,18 +10,23 @@ A test automation project built with Playwright and TypeScript.
 - UI automated testing
 - API testing
 - Page Object Model (POM)
-- Test data management
+- Data-driven testing with JSON files
+- TypeScript interfaces for test data and API models
 - HTML reporting
 - Screenshots on failure
-- GitHub Actions CI/CD pipeline
+- Cross-browser testing (Chromium, Firefox, WebKit)
+- GitHub Actions CI pipeline
+- Dockerized test execution
 
-## Test Application
+
+## Test Applications
 
 UI Tests:
 - https://www.saucedemo.com
 
 API Tests:
-- https://reqres.in
+- https://jsonplaceholder.typicode.com
+
 
 ## Tech Stack
 
@@ -29,3 +34,17 @@ API Tests:
 - TypeScript
 - Git
 - GitHub Actions
+- Docker
+
+
+## Run Tests
+
+### Local
+
+npm install
+npx playwright test
+
+### Docker
+
+docker build -t playwright-learning .
+docker run --rm playwright-learning

@@ -107,7 +107,7 @@ test("create POST 3 with JSONPlaceholder API", async ({ request }) => {
   const body: Article = await response.json();
   // console.log(body);
   expect(body.id).toBeDefined();
-  expect(body).toMatchObject(articles.articles);
+  expect(body).toMatchObject({...articles.articles[0]});
 });
 
 // avec typage et plusieurs jeux de données json

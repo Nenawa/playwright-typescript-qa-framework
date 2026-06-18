@@ -110,4 +110,6 @@ test("create POST 3 with JSONPlaceholder API", async ({ request }) => {
 
 });
 
-test("")
+// avec typage et plusieurs jeux de données
+//for(const article of articles[])
+//test("")

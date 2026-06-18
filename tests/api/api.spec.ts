@@ -1,8 +1,9 @@
 import { test, request, expect } from "@playwright/test";
-import { Post } from "../../interfaces/Post";
-import posts from "../../test-data/posts.json";
-import { PostPayload } from "../../interfaces/PostPayload";
+import { Article } from "../../interfaces/Article";
+import articles from "../../test-data/articles.json";
+import { ArticlePayload } from "../../interfaces/ArticlePayload";
 
+//______GET__________________________________________________________
 // sans typage des données
 test("Get users from JSONPlaceholder API", async ({ request }) => {
   const response = await request.get(
@@ -29,7 +30,7 @@ test("Get users from JSONPlaceholder API through interface", async ({
   );
   expect(response.ok()).toBeTruthy();
 
-  const body: Post[] = await response.json();
+  const body: Article[] = await response.json();
   //console.log(body);
   expect(body.length).toBeGreaterThan(0);
 
@@ -75,7 +76,7 @@ test("create POST 2 with JSONPlaceholder API", async ({ request }) => {
 
   expect(response.status()).toBe(201);
 
-  const body: Post = await response.json();
+  const body: Article = await response.json();
   expect(body).toMatchObject({
     userId: 123,
     title: "Loving API power",
@@ -93,7 +94,7 @@ test("create POST 2 with JSONPlaceholder API", async ({ request }) => {
 
 // avec typage et jeux de données
 test("create POST 3 with JSONPlaceholder API", async ({ request }) => {
-  const payload: PostPayload = posts.validPost;
+  const payload: ArticlePayload = articles.article_1;
 
   const response = await request.post(
     "https://jsonplaceholder.typicode.com/posts",
@@ -102,9 +103,11 @@ test("create POST 3 with JSONPlaceholder API", async ({ request }) => {
 
   expect(response.status()).toBe(201);
 
-  const body: Post = await response.json();
+  const body: Article = await response.json();
   // console.log(body);
   expect(body.id).toBeDefined();
-  expect(body).toMatchObject(posts.validPost);
+  expect(body).toMatchObject(articles.article_1);
 
 });
+
+test("")

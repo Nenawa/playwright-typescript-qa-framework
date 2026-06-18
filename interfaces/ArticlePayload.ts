@@ -3,3 +3,7 @@ export interface ArticlePayload {
   title: string;
   body: string;
 }
+
+export interface ArticlesData {
+  articles: ArticlePayload[];
+}

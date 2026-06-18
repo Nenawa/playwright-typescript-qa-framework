@@ -1,7 +1,7 @@
 import { test, request, expect } from "@playwright/test";
 import { Article } from "../../interfaces/Article";
 import articles from "../../test-data/articles.json";
-import { ArticlePayload } from "../../interfaces/ArticlePayload";
+import { ArticlePayload, ArticlesData } from "../../interfaces/ArticlePayload";
 
 //______GET__________________________________________________________
 // sans typage des données
@@ -40,6 +40,7 @@ test("Get users from JSONPlaceholder API through interface", async ({
   // expect(typeof body[0].title).toBe("string");   inutile avec typage
 });
 
+//______POST__________________________________________________________
 // sans typage des données
 test("create POST with JSONPlaceholder API", async ({ request }) => {
   const response = await request.post(
@@ -61,7 +62,7 @@ test("create POST with JSONPlaceholder API", async ({ request }) => {
   expect(typeof body.body).toBe("string");
 });
 
-// Avec type des données via l'interface Post
+// Avec type des données via l'interface Article
 test("create POST 2 with JSONPlaceholder API", async ({ request }) => {
   const response = await request.post(
     "https://jsonplaceholder.typicode.com/posts",
@@ -94,11 +95,11 @@ test("create POST 2 with JSONPlaceholder API", async ({ request }) => {
 
 // avec typage et jeux de données
 test("create POST 3 with JSONPlaceholder API", async ({ request }) => {
-  const payload: ArticlePayload = articles.article_1;
+  const payload: ArticlePayload = articles.articles[0];
 
   const response = await request.post(
     "https://jsonplaceholder.typicode.com/posts",
-    { data: payload }
+    { data: payload },
   );
 
   expect(response.status()).toBe(201);
@@ -106,10 +107,40 @@ test("create POST 3 with JSONPlaceholder API", async ({ request }) => {
   const body: Article = await response.json();
   // console.log(body);
   expect(body.id).toBeDefined();
-  expect(body).toMatchObject(articles.article_1);
-
+  expect(body).toMatchObject(articles.articles);
 });
 
-// avec typage et plusieurs jeux de données
-//for(const article of articles[])
-//test("")
+// avec typage et plusieurs jeux de données json
+const testData: ArticlesData = articles;
+
+for (const article of testData.articles) {
+  // inférence de type pour article
+
+  test(`create article with JSONPlaceholder API - ${article.title}`, async ({
+    request,
+  }) => {
+    const newArticle = await request.post(
+      "https://jsonplaceholder.typicode.com/posts",
+      { data: article },
+    );
+    expect(newArticle.status()).toBe(201);
+
+    const createdArticle: Article = await newArticle.json();
+    expect(createdArticle.id).toBeDefined();
+    expect(createdArticle).toMatchObject({ ...article });
+  });
+}
+
+//______PUT__________________________________________________________
+// modifier une data et vérifier ensuite la modification
+test(`Update article with JSONPlaceholder API - `, async ({ request }) => {
+  const payload: Article = articles.articlesToUpdate[0];
+  const articleToUpdate = await request.put(
+    "https://jsonplaceholder.typicode.com/posts/1",
+    { data: payload },
+  );
+  const UpdatedArticle = await articleToUpdate.json();
+  console.log(UpdatedArticle);
+  expect(UpdatedArticle).toMatchObject({...articles.articlesToUpdate[0]});
+  expect(UpdatedArticle.title).toContain("update");
+});

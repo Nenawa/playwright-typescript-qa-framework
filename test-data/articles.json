@@ -1,12 +1,24 @@
 {
-  "article_1": {
-    "userId": 123,
-    "title": "Loving API power",
-    "body": "this is a very long body"
-  },
-  "article_2": {
-    "userId": 456,
-    "title": "Playwright API",
-    "body": "Testing API with Playwright"
-  }
+  "articles": [
+    {
+      "userId": 123,
+      "title": "Loving API power",
+      "body": "this is a very long body"
+    },
+    {
+      "userId": 456,
+      "title": "Playwright API",
+      "body": "Testing API with Playwright"
+    }
+  ],
+  "articlesToUpdate": [
+    {
+      "id": 1,
+      "userId": 1,
+      "title": "update Loving API power",
+      "body": "update this is a very long body"
+    }
+  ],
+  "articlesToPatch": [],
+  "articlesToDelete": []
 }

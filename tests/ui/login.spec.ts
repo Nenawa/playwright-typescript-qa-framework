@@ -9,8 +9,7 @@ test.describe("Login", () => {
     test(`successful login - ${validUser.username}`, async ({ page }) => {
       const loginPage = new LoginPage(page);
 
-      await loginPage.goto();
-      await loginPage.login(validUser);
+      await loginPage.openAndLogin(validUser);
 
       await expect(page).toHaveURL(/inventory/);
     });
@@ -22,10 +21,8 @@ test.describe("Login", () => {
     test(`Unsuccessful login - ${invalidUser.username}`, async ({ page }) => {
       const loginPage = new LoginPage(page);
 
-      await loginPage.goto();
-      await loginPage.login(invalidUser);
+      await loginPage.openAndLogin(invalidUser);
 
-      await expect(page).toHaveURL(/inventory/);
-    });
+await expect(loginPage.errorMessage).toBeVisible();    });
   }
 });

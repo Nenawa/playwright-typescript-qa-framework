@@ -204,13 +204,11 @@ for (const article of dataToDelete) {
     const deletedArticle: Article = await articleToDelete.json();
     console.log("Réponse :", deletedArticle);
     expect(articleToDelete.ok()).toBeTruthy();
-
-    // ne fonctionne possiblement pas avec json placeholder
-    // const getResponse = await request.get(`/posts/${article.id}`);
-    //expect(getResponse.status()).toBe(404);
-
     expect(articleToDelete.status()).toBe(200);
 
     expect(deletedArticle).toEqual({});
+    // ne fonctionne possiblement pas avec json placeholder
+    // const getResponse = await request.get(`/posts/${article.id}`);
+    //expect(getResponse.status()).toBe(404);
   });
 }

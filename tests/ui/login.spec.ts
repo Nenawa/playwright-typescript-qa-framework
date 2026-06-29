@@ -23,6 +23,7 @@ test.describe("Login", () => {
 
       await loginPage.openAndLogin(invalidUser);
 
-await expect(loginPage.errorMessage).toBeVisible();    });
+      await expect(loginPage.errorMessage).toBeVisible();
+    });
   }
 });

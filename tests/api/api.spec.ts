@@ -187,3 +187,30 @@ for (const article of dataToPatch) {
     expect(patchedArticle.title).toBe(article.title);
   });
 }
+
+//______DELETE__________________________________________________________
+const dataToDelete: Article[] = articles.articlesToDelete;
+for (const article of dataToDelete) {
+  test(`delete article with JSONPlaceholder API - ${article.title}`, async ({
+    request,
+  }) => {
+    console.log("Payload envoyé :", article);
+
+    const articleToDelete = await request.delete(
+      `https://jsonplaceholder.typicode.com/posts/${article.id}`,
+      { data: article },
+    );
+
+    const deletedArticle: Article = await articleToDelete.json();
+    console.log("Réponse :", deletedArticle);
+    expect(articleToDelete.ok()).toBeTruthy();
+
+    // ne fonctionne possiblement pas avec json placeholder
+    // const getResponse = await request.get(`/posts/${article.id}`);
+    //expect(getResponse.status()).toBe(404);
+
+    expect(articleToDelete.status()).toBe(200);
+
+    expect(deletedArticle).toEqual({});
+  });
+}

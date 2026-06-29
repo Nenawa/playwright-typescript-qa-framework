@@ -35,5 +35,18 @@
       "title": "patch some more title"
     }
   ],
-  "articlesToDelete": []
+  "articlesToDelete": [
+    {
+      "id": 3,
+      "userId": 1,
+      "title": "to delete title Loving API power",
+      "body": "to delete body this is a very long body"
+    },
+    {
+      "id": 4,
+      "userId": 1,
+      "title": "to delete some API",
+      "body": "to delete body this nice BODY"
+    }
+  ]
 }

@@ -107,7 +107,7 @@ test("create POST 3 with JSONPlaceholder API", async ({ request }) => {
   const body: Article = await response.json();
   // console.log(body);
   expect(body.id).toBeDefined();
-  expect(body).toMatchObject({...articles.articles[0]});
+  expect(body).toMatchObject({ ...articles.articles[0] });
 });
 
 // avec typage et plusieurs jeux de données json
@@ -141,6 +141,28 @@ test(`Update article with JSONPlaceholder API - `, async ({ request }) => {
   );
   const UpdatedArticle = await articleToUpdate.json();
   console.log(UpdatedArticle);
-  expect(UpdatedArticle).toMatchObject({...articles.articlesToUpdate[0]});
+  expect(UpdatedArticle).toMatchObject({ ...articles.articlesToUpdate[0] });
   expect(UpdatedArticle.title).toContain("update");
 });
+
+// modifier plusieurs articles du jeux de données et vérification
+const dataToUpdate: Article[] = articles.articlesToUpdate
+for (const article of dataToUpdate) {
+  test(`modify article with JSONPlaceholder API - ${article.title}`, async ({
+    request,
+  }) => {
+    const articleToUpdate = await request.put(
+      `https://jsonplaceholder.typicode.com/posts/${article.id}`,
+      { data: article },
+    );
+
+    
+    const updatedArticle: Article = await articleToUpdate.json();
+    console.log(updatedArticle);
+    expect(articleToUpdate.status()).toBe(200);
+    
+    expect(updatedArticle.id).toBeDefined();
+    expect(updatedArticle.id).toBe(article.id);
+  expect(updatedArticle).toMatchObject({ ...article });
+  });
+}

@@ -17,8 +17,23 @@
       "userId": 1,
       "title": "update Loving API power",
       "body": "update this is a very long body"
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "title": "update some API",
+      "body": "update this nice BODY"
     }
   ],
-  "articlesToPatch": [],
+  "articlesToPatch": [
+    {
+      "id": 3,
+      "title": "patch some title"
+    },
+    {
+      "id": 4,
+      "title": "patch some more title"
+    }
+  ],
   "articlesToDelete": []
 }

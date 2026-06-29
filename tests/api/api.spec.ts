@@ -2,6 +2,7 @@ import { test, request, expect } from "@playwright/test";
 import { Article } from "../../interfaces/Article";
 import articles from "../../test-data/articles.json";
 import { ArticlePayload, ArticlesData } from "../../interfaces/ArticlePayload";
+import { PatchArticlePayload } from "../../interfaces/PatchArticlePayload";
 
 //______GET__________________________________________________________
 // sans typage des données
@@ -146,7 +147,7 @@ test(`Update article with JSONPlaceholder API - `, async ({ request }) => {
 });
 
 // modifier plusieurs articles du jeux de données et vérification
-const dataToUpdate: Article[] = articles.articlesToUpdate
+const dataToUpdate: Article[] = articles.articlesToUpdate;
 for (const article of dataToUpdate) {
   test(`modify article with JSONPlaceholder API - ${article.title}`, async ({
     request,
@@ -156,13 +157,33 @@ for (const article of dataToUpdate) {
       { data: article },
     );
 
-    
     const updatedArticle: Article = await articleToUpdate.json();
     console.log(updatedArticle);
     expect(articleToUpdate.status()).toBe(200);
-    
+
     expect(updatedArticle.id).toBeDefined();
     expect(updatedArticle.id).toBe(article.id);
-  expect(updatedArticle).toMatchObject({ ...article });
+    expect(updatedArticle).toMatchObject({ ...article });
+  });
+}
+
+//______PATCH__________________________________________________________
+const dataToPatch: PatchArticlePayload[] = articles.articlesToPatch;
+for (const article of dataToPatch) {
+  test(`modify article with JSONPlaceholder API - ${article.title}`, async ({
+    request,
+  }) => {
+    console.log("Payload envoyé :", article);
+
+    const articleToPatch = await request.patch(
+      `https://jsonplaceholder.typicode.com/posts/${article.id}`,
+      { data: article },
+    );
+    const patchedArticle: Article = await articleToPatch.json();
+    console.log("Réponse :", patchedArticle);
+    expect(articleToPatch.status()).toBe(200);
+    // on vérifie uniquement les propriétés qui ont étées modifiées
+    expect(patchedArticle.id).toBe(article.id);
+    expect(patchedArticle.title).toBe(article.title);
   });
 }

@@ -20,13 +20,16 @@ POM
 
     Élément de la page
     │
-    ├── dépend d'un paramètre ? locator fixe ?
+    ├── dépend d'un paramètre ? locator fixe ? plusieurs choix possibles ?
+        Est-ce que je veux faire une action dessus ? (clic ? remplir?)
     │      │
     │      ├── NON → attribut (Locator)
     │      └── OUI → méthode qui retourne un Locator
     │
     └── Action utilisateur
            └── méthode async
+
+
 
 
     | Ce que je représente             | Dans le POM                       |

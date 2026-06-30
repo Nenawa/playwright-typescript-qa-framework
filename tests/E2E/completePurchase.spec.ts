@@ -4,6 +4,7 @@ import users from "../../test-data/users.json";
 import { InventoryPage } from "../../pages/InventoryPage";
 import { CartPage } from "../../pages/CartPage";
 import { CheckoutInformationPage } from "../../pages/CheckoutInformationPage";
+import { CheckoutOverviewPage } from "../../pages/CheckoutOverviewPage";
 
 test("Complete purchase", async ({ page }) => {
   // login
@@ -15,19 +16,19 @@ test("Complete purchase", async ({ page }) => {
   // Inventory
   await expect(page).toHaveURL(/inventory/);
   const inventoryPage = new InventoryPage(page);
-  const product = "sauce-labs-backpack";
-  console.log("product:", product);
-  await inventoryPage.addProduct(product);
+  const inventoryItem = "sauce-labs-backpack";
+  console.log("product:", inventoryItem);
+  await inventoryPage.addProduct(inventoryItem);
   await inventoryPage.openCart();
 
   // Cart
   await expect(page).toHaveURL(/cart/);
   const cartPage = new CartPage(page);
-  const cartItem = "Sauce Labs Backpack";
-  await expect(cartPage.cartItem(cartItem)).toBeVisible();
+  const product = "Sauce Labs Backpack";
+  await expect(cartPage.cartItem(product)).toBeVisible();
   await cartPage.checkout();
 
-  //Checkout
+  //Checkout informations
   await expect(page).toHaveURL(/checkout-step-one/);
   const checkoutInformationPage = new CheckoutInformationPage(page);
   const customer = {
@@ -37,4 +38,13 @@ test("Complete purchase", async ({ page }) => {
   };
   await checkoutInformationPage.fillInformation(customer);
   await checkoutInformationPage.continue();
+
+  // Checkout overview
+  await expect(page).toHaveURL(/checkout-step-two/);
+  const checkoutOverviewPage = new CheckoutOverviewPage(page);
+  await expect(checkoutOverviewPage.checkoutItem(product)).toBeVisible();
+  await expect(checkoutOverviewPage.paymentInformation).toBeVisible();
+  await expect(checkoutOverviewPage.shippingInformation).toBeVisible();
+  await expect(checkoutOverviewPage.totalPrice).toBeVisible();
+  await checkoutOverviewPage.finish();
 });

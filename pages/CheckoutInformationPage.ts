@@ -1,7 +1,7 @@
 import { Locator, Page } from "@playwright/test";
 import { Customer } from "../interfaces/Customer";
 
-export class CheckoutPage {
+export class CheckoutInformationPage {
     readonly firstNameInput: Locator;
     readonly lastNameInput: Locator;
     readonly postalCodeInput: Locator; 

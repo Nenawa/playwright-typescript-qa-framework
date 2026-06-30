@@ -3,7 +3,7 @@ import test, { expect } from "@playwright/test";
 import users from "../../test-data/users.json";
 import { InventoryPage } from "../../pages/InventoryPage";
 import { CartPage } from "../../pages/CartPage";
-import { CheckoutPage } from "../../pages/CheckoutPage";
+import { CheckoutInformationPage } from "../../pages/CheckoutInformationPage";
 
 test("Complete purchase", async ({ page }) => {
   // login
@@ -29,12 +29,12 @@ test("Complete purchase", async ({ page }) => {
 
   //Checkout
   await expect(page).toHaveURL(/checkout-step-one/);
-  const checkoutPage = new CheckoutPage(page);
+  const checkoutInformationPage = new CheckoutInformationPage(page);
   const customer = {
     firstname: "anne",
     lastname: "wal",
     postalCode: "12345",
   };
-  await checkoutPage.fillInformation(customer);
-  await checkoutPage.continue();
+  await checkoutInformationPage.fillInformation(customer);
+  await checkoutInformationPage.continue();
 });

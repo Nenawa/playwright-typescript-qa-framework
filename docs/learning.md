@@ -20,7 +20,7 @@ POM
 
     Élément de la page
     │
-    ├── dépend d'un paramètre ?
+    ├── dépend d'un paramètre ? locator fixe ?
     │      │
     │      ├── NON → attribut (Locator)
     │      └── OUI → méthode qui retourne un Locator

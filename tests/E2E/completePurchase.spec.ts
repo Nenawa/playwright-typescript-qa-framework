@@ -3,6 +3,7 @@ import test, { expect } from "@playwright/test";
 import users from "../../test-data/users.json";
 import { InventoryPage } from "../../pages/InventoryPage";
 import { CartPage } from "../../pages/CartPage";
+import { CheckoutPage } from "../../pages/CheckoutPage";
 
 test("Complete purchase", async ({ page }) => {
   // login
@@ -23,9 +24,17 @@ test("Complete purchase", async ({ page }) => {
   await expect(page).toHaveURL(/cart/);
   const cartPage = new CartPage(page);
   const cartItem = "Sauce Labs Backpack";
-  expect(cartPage.cartItem(cartItem)).toBeVisible();
+  await expect(cartPage.cartItem(cartItem)).toBeVisible();
   await cartPage.checkout();
 
   //Checkout
-  
+  await expect(page).toHaveURL(/checkout-step-one/);
+  const checkoutPage = new CheckoutPage(page);
+  const customer = {
+    firstname: "anne",
+    lastname: "wal",
+    postalCode: "12345",
+  };
+  await checkoutPage.fillInformation(customer);
+  await checkoutPage.continue();
 });

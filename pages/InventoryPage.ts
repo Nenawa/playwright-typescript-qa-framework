@@ -14,4 +14,7 @@ export class InventoryPage {
   async openCart() {
     await this.page.locator('[data-test="shopping-cart-link"]').click();
   }
+
+// la pastille au dessus du chariot doit contenir le nb d'article ajoutés
+
 }

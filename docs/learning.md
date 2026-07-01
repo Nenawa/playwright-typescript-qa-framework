@@ -20,7 +20,7 @@ POM
 
     Élément de la page
     │
-    ├── dépend d'un paramètre ? locator fixe ? plusieurs choix possibles ?
+    ├── dépend d'un paramètre ? locator dynamique ? plusieurs choix possibles ?
         Est-ce que je veux faire une action dessus ? (clic ? remplir?)
     │      │
     │      ├── NON → attribut (Locator)

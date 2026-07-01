@@ -5,6 +5,7 @@ import { InventoryPage } from "../../pages/InventoryPage";
 import { CartPage } from "../../pages/CartPage";
 import { CheckoutInformationPage } from "../../pages/CheckoutInformationPage";
 import { CheckoutOverviewPage } from "../../pages/CheckoutOverviewPage";
+import { CheckoutCompletePage } from "../../pages/CheckoutCompletePage";
 
 test("Complete purchase", async ({ page }) => {
   // login
@@ -47,4 +48,13 @@ test("Complete purchase", async ({ page }) => {
   await expect(checkoutOverviewPage.shippingInformation).toBeVisible();
   await expect(checkoutOverviewPage.totalPrice).toBeVisible();
   await checkoutOverviewPage.finish();
+
+  // checkout Complete
+  await expect(page).toHaveURL(/checkout-complete/);
+  const checkoutCompletePage = new CheckoutCompletePage(page);
+  await expect(checkoutCompletePage.orderConfirmationMessage).toBeVisible();
+  await checkoutCompletePage.returnToCatalog();
+
+  // Home page
+  await expect(page).toHaveURL(/inventory/);
 });
